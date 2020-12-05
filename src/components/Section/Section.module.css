@@ -1,11 +1,8 @@
 .section {
   margin: 0 auto;
   width: 50%;
-  /* background-color: red; */
 }
 
-.title {
-  margin: 0 0 20px;
-  font-size: 28px;
-  font-weight: 700;
+.section:not(:last-child) {
+  margin-bottom: 20px;
 }

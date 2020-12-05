@@ -4,10 +4,12 @@ import s from './ContactsForm.module.css';
 class ContactsForm extends Component {
   state = {
     name: '',
+    number: '',
   };
 
   handleChangeForm = e => {
-    this.setState({ name: e.currentTarget.value });
+    const { name, value } = e.currentTarget;
+    this.setState({ [name]: value });
   };
 
   handleSubmitForm = e => {
@@ -17,13 +19,16 @@ class ContactsForm extends Component {
   };
 
   resetForm = () => {
-    this.setState({ name: '' });
+    this.setState({
+      name: '',
+      number: '',
+    });
   };
 
   render() {
     return (
       <form className={s.form} onSubmit={this.handleSubmitForm}>
-        <label className={s.label} htmlFor="">
+        <label className={s.label} htmlFor="name">
           Name
         </label>
         <input
@@ -33,6 +38,19 @@ class ContactsForm extends Component {
           value={this.state.name}
           onChange={this.handleChangeForm}
           autoComplete="off"
+          id="name"
+        ></input>
+        <label className={s.label} htmlFor="number">
+          Number
+        </label>
+        <input
+          className={s.input}
+          type="tel"
+          name="number"
+          value={this.state.number}
+          onChange={this.handleChangeForm}
+          autoComplete="off"
+          id="number"
         ></input>
         <button className={s.button} type="submit">
           Add contact
