@@ -16,14 +16,19 @@ class App extends Component {
   };
 
   onHandleSubmit = ({ name, number }) => {
-    const contact = {
+    const newContact = {
       id: shortid.generate(),
       name,
       number,
     };
-    this.setState(prevState => ({
-      contacts: [contact, ...prevState.contacts],
-    }));
+    const include = this.state.contacts.some(
+      contact => contact.name === newContact.name,
+    );
+    !include
+      ? this.setState(prevState => ({
+          contacts: [newContact, ...prevState.contacts],
+        }))
+      : alert(`${newContact.name} is already in your contacts`);
   };
 
   onDeleteButton = contactId => {
