@@ -16,7 +16,6 @@ class App extends Component {
   };
 
   onHandleSubmit = ({ name, number }) => {
-    console.log(name, number);
     const contact = {
       id: shortid.generate(),
       name,
@@ -25,7 +24,12 @@ class App extends Component {
     this.setState(prevState => ({
       contacts: [contact, ...prevState.contacts],
     }));
-    console.log(this.state.contacts.length);
+  };
+
+  onDeleteButton = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    }));
   };
 
   render() {
@@ -41,7 +45,10 @@ class App extends Component {
         {contacts.length > 0 && (
           <Section>
             <h2>Contacts</h2>
-            <ContactsList contacts={contacts}></ContactsList>
+            <ContactsList
+              contacts={contacts}
+              onDelete={this.onDeleteButton}
+            ></ContactsList>
           </Section>
         )}
       </Container>
