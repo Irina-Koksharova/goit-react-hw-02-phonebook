@@ -1,4 +1,4 @@
-// import { Component } from 'react';
+import PropTypes from 'prop-types';
 import s from './Filter.module.css';
 
 const Filter = ({ value, onFilter }) => {
@@ -17,15 +17,9 @@ const Filter = ({ value, onFilter }) => {
   );
 };
 
-// class Filter extends Component {
-//     render() {
-//         return (
-//             <>
-//                 <label className={s.label} htmlFor='input'>Find contact by name</label>
-//                 <input className={s.input} value={ } id='input'></input>
-//             </>
-//         )
-//     }
-// }
+Filter.propTypes = {
+  value: PropTypes.string.isRequired,
+  onFilter: PropTypes.func.isRequired,
+};
 
 export default Filter;

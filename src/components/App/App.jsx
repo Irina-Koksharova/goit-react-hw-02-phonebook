@@ -40,6 +40,7 @@ class App extends Component {
   handleDeleteButton = contactId => {
     this.setState(({ contacts }) => ({
       contacts: contacts.filter(contact => contact.id !== contactId),
+      filter: '',
     }));
   };
 

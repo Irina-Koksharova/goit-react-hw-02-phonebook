@@ -7,6 +7,10 @@
   outline: none;
 }
 
+.input:focus {
+  transform: scale(1.05);
+}
+
 .label {
   display: block;
   margin-bottom: 10px;
