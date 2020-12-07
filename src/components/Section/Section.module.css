@@ -1,6 +1,5 @@
 .section {
   margin: 0 auto;
-  width: 50%;
 }
 
 .section:not(:last-child) {
