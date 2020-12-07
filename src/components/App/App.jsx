@@ -3,6 +3,7 @@ import shortid from 'shortid';
 import Container from '../../components/Container';
 import Section from '../Section/Section';
 import ContactsForm from '../ContactsForm';
+import Filter from '../Filter';
 import ContactsList from '../ContactsList';
 
 class App extends Component {
@@ -13,46 +14,56 @@ class App extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
+    filter: '',
   };
 
-  onHandleSubmit = ({ name, number }) => {
+  handleSubmitForm = ({ name, number }) => {
     const newContact = {
       id: shortid.generate(),
       name,
       number,
     };
-    const include = this.state.contacts.some(
+    const includesContact = this.state.contacts.some(
       contact => contact.name === newContact.name,
     );
-    !include
-      ? this.setState(prevState => ({
-          contacts: [newContact, ...prevState.contacts],
+    !includesContact
+      ? this.setState(({ contacts }) => ({
+          contacts: [newContact, ...contacts],
         }))
       : alert(`${newContact.name} is already in your contacts`);
   };
 
-  onDeleteButton = contactId => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+  handleChangeFilter = e => {
+    this.setState({ filter: e.currentTarget.value });
+  };
+
+  handleDeleteButton = contactId => {
+    this.setState(({ contacts }) => ({
+      contacts: contacts.filter(contact => contact.id !== contactId),
     }));
   };
 
   render() {
-    const { contacts } = this.state;
+    const { contacts, filter } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+    const visibleContacts = contacts.filter(({ name }) =>
+      name.toLowerCase().includes(normalizedFilter),
+    );
 
     return (
       <Container>
         <Section>
           <h1>Phonebook</h1>
-          <ContactsForm onSubmit={this.onHandleSubmit} />
+          <ContactsForm onSubmit={this.handleSubmitForm} />
         </Section>
 
         {contacts.length > 0 && (
           <Section>
             <h2>Contacts</h2>
+            <Filter value={filter} onFilter={this.handleChangeFilter} />
             <ContactsList
-              contacts={contacts}
-              onDelete={this.onDeleteButton}
+              contacts={visibleContacts}
+              onDelete={this.handleDeleteButton}
             ></ContactsList>
           </Section>
         )}

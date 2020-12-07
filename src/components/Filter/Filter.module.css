@@ -1,0 +1,15 @@
+.input {
+  min-width: 250px;
+  height: 40px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 4px;
+  outline: none;
+}
+
+.label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: 500;
+}
