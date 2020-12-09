@@ -10,7 +10,7 @@ const ContactItem = ({ id, name, number, onDelete }) => {
     <li className={s.item}>
       <p className={s.name}>{name}:</p>
       <p className={s.number}>{number}</p>
-      <button className={s.button} onClick={() => deleteContact(id)}>
+      <button className={s.button} onClick={() => deleteContact()}>
         Del
       </button>
     </li>
